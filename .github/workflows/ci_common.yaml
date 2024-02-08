@@ -1,7 +1,5 @@
 name: Reusable Workflow Example
 on:
-  push:
-    branches: 'main'
   workflow_call:
     inputs:
       sonar_host:
@@ -19,7 +17,7 @@ on:
     secrets:
       SLACK_BOT_TOKEN:
         required: true
-        
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,6 +45,9 @@ jobs:
       - name: Execution des tests
         run: |
             echo "Execution des tests"
+      - name: 
+        run: |
+          docker build . -f Dockerfile --tag custom-laravel:0.0.1
       - name: Post to a Slack channel
         if: failure()
         id: slack
