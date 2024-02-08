@@ -61,8 +61,6 @@ jobs:
           channel-id: ${{ inputs.channel_id }}
           slack-message: "GitHub build result: ${{ inputs.job_status }}\n${{ inputs.github_actor }}\n${{ inputs.runner_os }}"
         env:
-          SLACK_BOT_TOKEN: 
-            secrets:
-              SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 
 
