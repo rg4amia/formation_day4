@@ -5,7 +5,7 @@ on:
   workflow_call:
     inputs:
       sonar_host:
-        required:
+        required: true
         type: string
       environment:
         required: true
