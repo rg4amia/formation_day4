@@ -66,7 +66,7 @@ jobs:
           composer CycloneDX:make-sbom --output-file=sbom.xml
       - name: Dependency Track
         run: |
-          curl -X "POST" "http://54.211.65.140:8081/api/v1/bom" \
+          curl -X "POST" "http://51.20.134.126:8081/api/v1/bom" \
           -H 'Content-Type: multipart/form-data' \
           -H "X-Api-Key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}" \
           -F "autoCreate=true" \
