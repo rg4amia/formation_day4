@@ -74,7 +74,7 @@ jobs:
           apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
           projectname: ${{ inputs.project_name }}
           projectversion: ${{ inputs.version_dependency }}
-          bomFilePath: '@./sbom.xml'
+          bomFilePath: './sbom.xml'
           timeoutInSecs: '10'
           failOnSeverityLevel: 'CRITICAL'
       # - name: Dependency Track
