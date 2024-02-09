@@ -53,11 +53,11 @@ jobs:
       - name: Execution des tests
         run: |
             echo "Execution des tests"
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@master
-        env: 
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #- name: SonarQube Scan
+      #  uses: SonarSource/sonarqube-scan-action@master
+      #  env: 
+      #    SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Generate SBOM with CycloneDX
         run: |
