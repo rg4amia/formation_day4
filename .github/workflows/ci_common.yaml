@@ -17,6 +17,10 @@ on:
     secrets:
       SLACK_BOT_TOKEN:
         required: true
+      SONAR_TOKEN:
+        required: true
+      SONAR_HOST_URL:
+        required: true
 
 jobs:
   build:
@@ -45,6 +49,11 @@ jobs:
       - name: Execution des tests
         run: |
             echo "Execution des tests"
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       - name: 
         run: |
           docker build . -f Dockerfile --tag custom-laravel:0.0.1
