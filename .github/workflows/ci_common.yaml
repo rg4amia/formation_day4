@@ -70,7 +70,7 @@ jobs:
       - name: Dependency Track
         uses: neerajsu/dependency-track-gh-action@v1.0.4
         with:
-          serverHostBaseUrl: 'https://depedency.server.url.company.com'
+          serverHostBaseUrl: 'http://51.20.134.126:8081'
           apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
           projectname: ${{ inputs.project_name }}
           projectversion: ${{ inputs.version_dependency }}
