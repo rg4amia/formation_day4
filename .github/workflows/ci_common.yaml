@@ -17,6 +17,9 @@ on:
       project_name:
         required: true
         type: string
+      version_dependency:
+        required: true
+        type: string
     secrets:
       SLACK_BOT_TOKEN:
         required: true
@@ -65,13 +68,23 @@ jobs:
           composer update
           composer CycloneDX:make-sbom --output-file=sbom.xml
       - name: Dependency Track
-        run: |
-          curl -X "POST" "http://51.20.134.126:8081/api/v1/bom" \
-          -H 'Content-Type: multipart/form-data' \
-          -H "X-Api-Key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}" \
-          -F "projectName=${{ inputs.project_name }}" \
-          -F "projectVersion=1.0" \
-          -F "bom=@./sbom.xml"
+        uses: neerajsu/dependency-track-gh-action@v1.0.4
+        with:
+          serverHostBaseUrl: 'https://depedency.server.url.company.com'
+          apikey: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          projectname: ${{ inputs.project_name }}
+          projectversion: ${{ inputs.version_dependency }}
+          bomFilePath: '@./sbom.xml'
+          timeoutInSecs: '10'
+          failOnSeverityLevel: 'CRITICAL'
+      # - name: Dependency Track
+      #   #run: |
+      #     curl -X "POST" "http://51.20.134.126:8081/api/v1/bom" \
+      #     -H 'Content-Type: multipart/form-data' \
+      #     -H "X-Api-Key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}" \
+      #     -F "projectName=${{ inputs.project_name }}" \
+      #     -F "projectVersion=1.0" \
+      #     -F "bom=@./sbom.xml"
       #- name: 
       #  run: |
       #    docker build . -f Dockerfile --tag custom-laravel:0.0.1
