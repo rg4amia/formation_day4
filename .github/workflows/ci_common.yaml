@@ -48,15 +48,15 @@ jobs:
         run: php artisan key:generate
       - name: Execution des tests
         run: |
-            echo "Execution des tests"
+            echo "Execution des tests ${{ secrets.SONAR_TOKEN }} \n ${{ secrets.SONAR_HOST_URL }}"
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      - name: 
-        run: |
-          docker build . -f Dockerfile --tag custom-laravel:0.0.1
+      #- name: 
+      #  run: |
+      #    docker build . -f Dockerfile --tag custom-laravel:0.0.1
       - name: Post to a Slack channel
         if: failure()
         id: slack
